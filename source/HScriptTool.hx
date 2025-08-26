@@ -1,22 +1,14 @@
 package;
 
-#if sys
-import sys.FileSystem;
-import sys.io.File;
-#end
 import haxe.io.Path;
 import flixel.util.FlxDestroyUtil.IFlxDestroyable;
 import hscript.Expr;
 import hscript.Parser;
 import hscript.Interp;
-import haxe.Constraints.Function;
-import haxe.DynamicAccess;
-import lime.app.Application;
+import openfl.utils.Assets;
 
 /*
 	HEAVILY BASED ON YOSHICRAFTER ENGINE'S SCRIPT CODE
-	HAVE A LOOK: https://raw.githubusercontent.com/YoshiCrafter29/YoshiCrafterEngine
-	I'mma probably remake this to be either original or modified to be like Codename, or just better in any way possible
  */
 class HScriptTool implements IFlxDestroyable
 {
@@ -150,7 +142,7 @@ class Script extends HScriptTool
 		super.loadFile();
 		if (filePath == null || filePath.trim() == "")
 			return;
-		var content:String = sys.io.File.getContent(filePath);
+		var content:String = Assets.getText(filePath);
 		var parser = new hscript.Parser();
 		try
 		{

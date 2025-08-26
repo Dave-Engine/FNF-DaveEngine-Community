@@ -28,6 +28,7 @@
 	<!-- _____________________________ Path Settings ____________________________ -->
 
 	<classpath name="source" />
+	<classpath name="sourceShadow" />
 
 	<set name="BUILD_DIR" value="export/debug" if="debug" />
 	<set name="BUILD_DIR" value="export/release" unless="debug" />
@@ -44,8 +45,8 @@
 	<assets path="CHANGELOG.md" rename='changelog.txt'/>
 	<assets path="assets/fonts" embed='true'/>
 
+	<define name="VIDEOS_ALLOWED" if="desktop || android" unless="32bits || hl"/>
 	<define name="CRASH_HANDLER" if="desktop release" />
-	<define name="VIDEOS_ALLOWED" if="desktop || android" unless="32bits"/>
 	<define name="SHADERS_ENABLED" unless="mac"/>
 	<define name="HSCRIPT_ALLOWED"/>
 	<define name="PRELOAD_ALL" unless="web" />
@@ -66,25 +67,23 @@
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" />
-	<haxedev set='webgl' if="web"/>
 	<haxelib name="flixel-addons" />
 	<haxelib name="hscript-improved" if="HSCRIPT_ALLOWED" />
 	<define name="hscriptPos" if="HSCRIPT_ALLOWED" />
 	<haxelib name="flixel-ui" />
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED" />
+	<haxelib name="hxcpp-debug-server" if="cpp debug"/>
+	<haxelib name="discord_rpc" if="desktop"/>
+
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
-	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
-	<haxelib name="hxcpp-debug-server" if="cpp debug"/>
 	<haxedef name="HXCPP_GC_SUMMARY" if="cpp debug"/>
-	<haxelib name="discord_rpc" if="desktop"/>
-	<haxelib name="flixel-screenshot-plugin" />
-  
+
 	<haxedef name="HXCPP_CHECK_POINTER" />
 	<haxedef name="HXCPP_STACK_LINE" />
 	<haxedef name="HXCPP_STACK_TRACE" />
 
-	<setenv name="next"/>
+	<haxedef name="no-inline" if="html5" />
 
 	<haxeflag name="--macro" value="allowPackage('flash')" />
 	<haxeflag name="--macro" value="include('my.pack')" />
