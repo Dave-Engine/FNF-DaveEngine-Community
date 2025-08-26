@@ -1,12 +1,7 @@
 package flixel.system;
 
 import flixel.text.FlxText;
-import flash.display.Graphics;
-import flash.display.Sprite;
-import flash.Lib;
-import flash.text.TextField;
-import flash.text.TextFormat;
-import flash.text.TextFormatAlign;
+import openfl.Lib;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -40,7 +35,7 @@ class FlxSplash extends FlxState
 	var skipScreen:FlxText;
 	#if (flixel >= "5.6.0")
 	var nextState:NextState;
-	
+
 	public function new(nextState:NextState)
 	{
 		super();

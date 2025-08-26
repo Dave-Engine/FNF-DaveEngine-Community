@@ -35,18 +35,17 @@ jobs:
           sudo apt-get install libvlc-dev libvlccore-dev vlc glibc-source libidn-dev libidn12
           haxelib setup ~/haxelib
           haxelib install hxcpp > /dev/null
-          haxelib install lime
-          haxelib install openfl
-          haxelib --never install flixel
+          haxelib install lime 8.2.2
+          haxelib install openfl 9.2.2
+          haxelib --never install flixel 5.2.2
           haxelib run lime setup flixel
           haxelib run lime setup
           haxelib install flixel-tools
-          haxelib install flixel-ui
-          haxelib install flixel-addons
+          haxelib install flixel-ui 2.6.0
+          haxelib install flixel-addons 2.11.0
           haxelib install hxCodec
-          haxelib install hscript
+          haxelib git hscript-improved https://github.com/Dave-Engine/hscript-improved
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
           haxelib install hxcpp-debug-server
           haxelib list
       - name: Create Version Tag
@@ -73,18 +72,17 @@ jobs:
         run: |
           haxelib setup C:/haxelib
           haxelib install hxcpp > nul
-          haxelib install lime
-          haxelib install openfl
-          haxelib --never install flixel
+          haxelib install lime 8.2.2
+          haxelib install openfl 9.2.2
+          haxelib --never install flixel 5.2.2
           haxelib run lime setup flixel
           haxelib run lime setup
           haxelib install flixel-tools
-          haxelib install flixel-ui
-          haxelib install flixel-addons
+          haxelib install flixel-ui 2.6.0
+          haxelib install flixel-addons 2.11.0
           haxelib install hxCodec
-          haxelib install hscript
+          haxelib git hscript-improved https://github.com/Dave-Engine/hscript-improved
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
           haxelib install hxcpp-debug-server
           haxelib list
         shell: cmd
@@ -112,18 +110,17 @@ jobs:
         run: |
           haxelib setup ~/haxelib
           haxelib install hxcpp > /dev/null
-          haxelib install lime
-          haxelib install openfl
-          haxelib --never install flixel
+          haxelib install lime 8.2.2
+          haxelib install openfl 9.2.2
+          haxelib --never install flixel 5.2.2
           haxelib run lime setup flixel
           haxelib run lime setup
           haxelib install flixel-tools
-          haxelib install flixel-ui
-          haxelib install flixel-addons
+          haxelib install flixel-ui 2.6.0
+          haxelib install flixel-addons 2.11.0
           haxelib install hxCodec
-          haxelib install hscript
+          haxelib git hscript-improved https://github.com/Dave-Engine/hscript-improved
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
           haxelib install hxcpp-debug-server
           haxelib list
       - name: Create Version Tag
@@ -135,4 +132,3 @@ jobs:
         with:
           name: macBuild
           path: export/release/macos/bin
-

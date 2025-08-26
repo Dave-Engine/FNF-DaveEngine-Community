@@ -1,26 +1,17 @@
 package;
 
-// import haxe.Log;
-import openfl.text.TextFormat;
+// import openfl.text.TextFormat;
 import flixel.FlxGame;
 import flixel.FlxState;
 import openfl.Assets;
 import openfl.Lib;
-import openfl.display.FPS;
 import openfl.display.Sprite;
-import openfl.events.Event;
 import flixel.system.FlxSound;
 import flixel.FlxG;
 import backend.SSPlugin as ScreenShotPlugin;
 import debug.FpsDisplay;
 #if CRASH_HANDLER
 import openfl.events.UncaughtErrorEvent;
-import haxe.CallStack;
-import haxe.io.Path;
-#end
-#if sys
-import sys.FileSystem;
-import sys.io.File;
 #end
 
 class Main extends Sprite
@@ -44,7 +35,6 @@ class Main extends Sprite
 	{
 		Lib.current.addChild(new Main());
 
-		openfl.system.System.gc();
 		#if cpp
 		cpp.NativeGc.enable(true);
 		cpp.NativeGc.run(true);
@@ -87,11 +77,11 @@ class Main extends Sprite
 			#end
 			openfl.system.System.gc();
 		});
-		backend.CrashHandler.init();
+		CrashHandler.init();
 
 		FlxG.fixedTimestep = false;
 
-		funkinGame = new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") zoom, #end framerate, framerate, skipSplash, startFullscreen); 
+		funkinGame = new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") zoom, #end framerate, framerate, skipSplash, startFullscreen);
 		addChild(funkinGame);
 
 		fps = new FpsDisplay(10, 3, 0xFFFFFF);
@@ -110,6 +100,12 @@ class Main extends Sprite
 			if (funkinGame._customSoundTray != null)
 				funkinGame._customSoundTray = flixel.system.ui.DaveSoundTray;
 		}
+		#end
+
+		// Forever engine crash handler frfr
+		// but in all seriousness this is better then nothing
+		#if CRASH_HANDLER
+		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 		#end
 	}
 }

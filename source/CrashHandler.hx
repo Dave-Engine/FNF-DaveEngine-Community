@@ -1,4 +1,4 @@
-package backend;
+package;
 
 // an fully working crash handler on ALL platforms
 
@@ -17,7 +17,7 @@ using CoolUtil;
 
 /**
  * Crash Handler.
- * @author YoshiCrafter29, Ne_Eo and MAJigsaw77
+ * @author YoshiCrafter29 and MAJigsaw77
  */
 
 class CrashHandler
@@ -78,9 +78,9 @@ class CrashHandler
 		}
 		stackLabel = stackLabelArr.join('\r\n');
 
-		errorMessage += "\nUncaught Error: " 
+		errorMessage += "\nUncaught Error: "
 			+ '$m\n$stackLabel'
-			+ "\nPlease report this error to the GitHub page: https://github.com/Erizur/FNF-DaveEngine>"
+			+ "\nPlease report this error to the GitHub page: https://github.com/Dave-Engine/FNF-DaveEngine-Community>"
 			+ "\nThe engine has saved a crash log inside the crash folder, If you're making a GitHub issue you might want to send that!";
 
 		#if sys
@@ -88,7 +88,7 @@ class CrashHandler
 		{
 			if (!FileSystem.exists("crash/"))
 				FileSystem.createDirectory("crash/");
-	
+
 			File.saveContent(path, errorMessage + "\n");
 		}
 		catch(e)

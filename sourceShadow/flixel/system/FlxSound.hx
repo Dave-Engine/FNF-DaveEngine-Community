@@ -1,12 +1,12 @@
 package flixel.system;
 
 #if (flixel < "5.3.0")
-import flash.events.Event;
-import flash.events.IEventDispatcher;
-import flash.media.Sound;
-import flash.media.SoundChannel;
-import flash.media.SoundTransform;
-import flash.net.URLRequest;
+import openfl.events.Event;
+import openfl.events.IEventDispatcher;
+import openfl.media.Sound;
+import openfl.media.SoundChannel;
+import openfl.media.SoundTransform;
+import openfl.net.URLRequest;
 import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.math.FlxMath;
@@ -15,9 +15,6 @@ import flixel.system.FlxAssets.FlxSoundAsset;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxStringUtil;
 import openfl.Assets;
-#if flash11
-import flash.utils.ByteArray;
-#end
 #if (openfl >= "8.0.0")
 import openfl.utils.AssetType;
 #end
@@ -400,28 +397,6 @@ class FlxSound extends FlxBasic
 
 		return init(Looped, AutoDestroy, OnComplete);
 	}
-
-	#if flash11
-	/**
-	 * One of the main setup functions for sounds, this function loads a sound from a ByteArray.
-	 *
-	 * @param	Bytes 			A ByteArray object.
-	 * @param	Looped			Whether or not this sound should loop endlessly.
-	 * @param	AutoDestroy		Whether or not this FlxSound instance should be destroyed when the sound finishes playing.
-	 * 							Default value is false, but `FlxG.sound.play()` and `FlxG.sound.stream()` will set it to true by default.
-	 * @return	This FlxSound instance (nice for chaining stuff together, if you're into that).
-	 */
-	public function loadByteArray(Bytes:ByteArray, Looped:Bool = false, AutoDestroy:Bool = false, ?OnComplete:Void->Void):FlxSound
-	{
-		cleanup(true);
-
-		_sound = new Sound();
-		_sound.addEventListener(Event.ID3, gotID3);
-		_sound.loadCompressedDataFromByteArray(Bytes, Bytes.length);
-
-		return init(Looped, AutoDestroy, OnComplete);
-	}
-	#end
 
 	function init(Looped:Bool = false, AutoDestroy:Bool = false, ?OnComplete:Void->Void):FlxSound
 	{

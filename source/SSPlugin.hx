@@ -1,5 +1,5 @@
 // This is modified version of https://github.com/zacksgamerz/flixel-screenshot-plugin/blob/master/src/screenshotplugin/ScreenShotPlugin.hx
-package backend;
+package;
 
 import flixel.util.FlxTimer;
 #if sys
@@ -22,7 +22,6 @@ using StringTools;
 /**
  * @author SayofTheLor
  * @author zacksgamerz
- * @author mcagabe19
  */
 class SSPlugin extends flixel.FlxBasic
 {

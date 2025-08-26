@@ -559,7 +559,7 @@ class PlayState extends MusicBeatState
 		{
 			try
 			{
-				scriptThing = HScriptTool.loadScript(Paths.scriptFile(SONG.song.toLowerCase()));
+				scriptThing = HScriptTool.create(Paths.scriptFile(SONG.song.toLowerCase()));
 				canRunScript = true;
 			}
 			catch (e)
@@ -589,7 +589,10 @@ class PlayState extends MusicBeatState
 			{
 			});
 			scriptThing.setVariable("PlayState", this);
-			scriptThing.executeFunction("create");
+
+			scriptThing.loadFile();
+
+			scriptThing.executeFunc("create");
 		}
 		#end
 
@@ -1602,7 +1605,7 @@ class PlayState extends MusicBeatState
 	{
 		#if HSCRIPT_ALLOWED
 		if (scriptThing != null && canRunScript)
-			scriptThing.executeFunction("update", [elapsed]);
+			scriptThing.executeFunc("update", [elapsed]);
 		#end
 
 		if (songName != null)
@@ -1707,25 +1710,25 @@ class PlayState extends MusicBeatState
 		final keyPressed:FlxKey = FlxG.keys.firstJustPressed();
 		if (keyPressed != FlxKey.ZERO){
 			switch (keyPressed) {
-				case FOUR: 
+				case FOUR:
 					trace('DUMP LOL:\nDAD POSITION: ${dad.getPosition()}\nBOYFRIEND POSITION: ${boyfriend.getPosition()}\nGF POSITION: ${gf.getPosition()}\nCAMERA POSITION: ${camFollow.getPosition()}');
-				case FIVE: 
+				case FIVE:
 					FlxG.switchState(new CharacterDebug(dad.curCharacter));
-				case SEMICOLON: 
+				case SEMICOLON:
 					FlxG.switchState(new CharacterDebug(boyfriend.curCharacter));
-				case COMMA: 
+				case COMMA:
 					FlxG.switchState(new CharacterDebug(gf.curCharacter));
-				case EIGHT: 
+				case EIGHT:
 					FlxG.switchState(new AnimationDebug(dad.curCharacter));
-				case SIX: 
+				case SIX:
 					FlxG.switchState(new AnimationDebug(boyfriend.curCharacter));
 				case THREE:
 					FlxG.switchState(new AnimationDebug(gf.curCharacter));
 				case SEVEN:
-					
+
 					if (FlxTransitionableState.skipNextTransIn)
 						Transition.nextCamera = null;
-		
+
 					switch (SONG.song.toLowerCase())
 					{
 						default:
@@ -1752,13 +1755,13 @@ class PlayState extends MusicBeatState
 						var daNote:Note = unspawnNotes.shift();
 						if (daNote.strumTime + 800 >= Conductor.songPosition)
 							break;
-		
+
 						daNote.destroy();
 					}
-		
+
 					FlxG.sound.music.time = Conductor.songPosition;
 					FlxG.sound.music.play();
-		
+
 					vocals.time = Conductor.songPosition;
 					vocals.play();
 					boyfriend.stunned = false;
@@ -2650,7 +2653,7 @@ class PlayState extends MusicBeatState
 
 		#if HSCRIPT_ALLOWED
 		if (scriptThing != null && canRunScript)
-			scriptThing.executeFunction("stepHit", [curStep]);
+			scriptThing.executeFunc("stepHit", [curStep]);
 		#end
 
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
@@ -2697,7 +2700,7 @@ class PlayState extends MusicBeatState
 
 		#if HSCRIPT_ALLOWED
 		if (scriptThing != null && canRunScript)
-			scriptThing.executeFunction("beatHit", [curBeat]);
+			scriptThing.executeFunc("beatHit", [curBeat]);
 		#end
 
 		var currentSection = SONG.notes[Std.int(curStep / 16)];
